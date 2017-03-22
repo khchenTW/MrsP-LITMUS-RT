@@ -1,11 +1,11 @@
 # MrsP-LITMUS-RT
-# Our implementation for MrsP only supports 4.1.3 kernel.
-To apply our implementation, you need to install LITMUS-RT kernel with the following instructions:
-
-sudo su
-cd $DIR
-wget https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.1.3.tar.gz
-tar xzf linux-4.1.3.tar.gz
+Our implementation for MrsP only supports 4.1.3 kernel.<br />
+To apply our implementation, you need to install LITMUS-RT kernel with the following instructions:<br />
+<br />
+sudo su<br />
+cd $DIR<br />
+wget https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.1.3.tar.gz<br />
+tar xzf linux-4.1.3.tar.gz<br />
 wget http://www.litmus-rt.org/releases/2016.1/litmus-rt-2016.1.patch
 mv linux-4.1.3 litmus-rt
 //debug drivers/media/usb/as102/as102_usb_drv.c //Add '&' twice on 117 and 135
