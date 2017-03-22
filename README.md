@@ -1,5 +1,5 @@
 # MrsP-LITMUS-RT
-Our implementation for MrsP only supports 4.1.3 kernel.
+# Our implementation for MrsP only supports 4.1.3 kernel.
 To apply our implementation, you need to install LITMUS-RT kernel with the following instructions:
 
 sudo su
