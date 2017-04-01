@@ -11,9 +11,9 @@ mv linux-4.1.3 litmus-rt<br />
 //debug drivers/media/usb/as102/as102_usb_drv.c //Add '&' twice on 117 and 135<br />
 cd litmus-rt<br />
 patch -p1 < ../litmus-rt-2016.1.patch<br />
-/* ********* */<br />
+/**********/<br />
 copy these files we provide above to replace the original files under litmus-rt (following our path)<br />
-/* ********* */<br />
+/***********/<br />
 
 sudo apt-get install libncurses5-dev<br />
 make menuconfig<br />
