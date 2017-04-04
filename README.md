@@ -1,5 +1,7 @@
 # MrsP-LITMUS-RT
-Our implementation for MrsP only supports 4.1.3 kernel.<br />
+Our implementation for MrsP only supports and tests for 4.1.3 kernel.<br />
+Since the development is based on the the source code of LITMUSRT, which is made available as open source under the terms of the GNU General Public License (GPL2), therefore, our source code is also under the terms of the GPL2.
+
 To apply our implementation, you need to install LITMUS-RT kernel with the following instructions:<br />
 <br />
 sudo su<br />
