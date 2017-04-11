@@ -1,7 +1,7 @@
 #!/bin/bash
 PROTO=MRSP
 TIME=600
-rtspin -w -p 0 -o 0.3 -L 0.24375 -A 0.43875 -q 2 0.4875 5 $TIME &
+rtspin -w -p 0 -o 0.1 -X $PROTO -L 0.24375 -A 0.43875 -q 4 0.4875 5 $TIME &
 sleep 1
 rtspin -w -p 0 -o 0.12 -X $PROTO -L 0.2375 -A 0.4275 -q 5 0.475 5 $TIME &
 sleep 1
@@ -23,7 +23,7 @@ rtspin -w -p 1 -X $PROTO -L 0.75 -A 1.35 -q 13 1.5 20 $TIME &
 sleep 1
 rtspin -w -p 1 -X $PROTO -L 0.725 -A 1.305 -q 14 1.45 20 $TIME &
 sleep 1
-rtspin -w -p 2 -o 0.4 -L 0.7 -A 1.26 -q 13 1.4 20 $TIME &
+rtspin -w -p 2 -o 0.4 -X $PROTO -L 0.7 -A 1.26 -q 13 1.4 20 $TIME &
 sleep 1
 rtspin -w -p 2 -o 0.1 -X $PROTO -L 0.675 -A 1.215 -q 16 1.35 20 $TIME &
 sleep 1
