@@ -10,11 +10,10 @@ tar xzf linux-4.1.3.tar.gz<br />
 wget http://www.litmus-rt.org/releases/2016.1/litmus-rt-2016.1.patch<br />
 copy the mrsp.patch under the same directory with litmus-rt.patch <br />
 mv linux-4.1.3 litmus-rt<br />
-//debug drivers/media/usb/as102/as102_usb_drv.c //Add '&' twice on 117 and 135<br />
 cd litmus-rt<br />
 patch -p1 < ../litmus-rt-2016.1.patch<br />
 <br />
-//then apply our MrsP patch again<br />
+//then apply our MrsP patch again, we also fix the bug on as102_usb.c<br />
 patch -p1 < ../mrsp.patch<br />
 <br />
 sudo apt-get install libncurses5-dev<br />
