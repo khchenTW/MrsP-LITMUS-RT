@@ -29,4 +29,6 @@ If you want use the liblitmus as well, you can apply our lib.patch after you dow
 cd liblitmus<br />
 patch -p1 < ../lib.patch<br />
 make<br />
-however, you need download or modify the 'rtspin.c' file by yourself since different users may have different purposes. <br />
+<br />
+However, you need download or modify the 'rtspin.c' file by yourself since different users may have different purposes. <br />
+Also, we have provided several possibilities if you are interested in, you can find them on the 'liblitmus/bin' folder. <br />
