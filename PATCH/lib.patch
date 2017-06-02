@@ -1,0 +1,79 @@
+diff -Naur liblitmus/include/litmus.h liblitmus-mrsp/include/litmus.h
+--- liblitmus/include/litmus.h	2016-06-22 11:28:09.000000000 +0200
++++ liblitmus-mrsp/include/litmus.h	2017-06-02 11:32:44.491571000 +0200
+@@ -30,6 +30,11 @@
+ #include <sys/types.h>
+ #include <stdint.h>
+ 
++#include <stdarg.h>
++#include <stdlib.h>
++#include <stdio.h>
++#include <errno.h>
++
+ /* Include kernel header.
+  * This is required for the rt_param
+  * and control_page structures.
+@@ -170,6 +175,7 @@
+ 	DPCP_SEM	= 4, /**< Distributed Priority Ceiling Protocol */
+ 	PCP_SEM		= 5, /**< Priority Ceiling Protocol */
+ 	DFLP_SEM	= 6, /**< Distributed FIFO Locking Protocol */
++	MRSP_SEM	= 7, /**< Multiprocessor Resource Sharing Protocol */
+ } obj_type_t;
+ 
+ /**
+@@ -419,6 +425,44 @@
+ }
+ 
+ /**
++ * Allocate a semaphore following the MRSP protocol
++ * @param fd File descriptor to associate lock with
++ * @param name Name of the lock, user-chosen integer
++ * @param per_cpu ceiling to associate this lock with
++ * @return Object descriptor for given lock
++ */
++static inline int open_mrsp_sem(int fd, int name, void * prio_per_cpu)
++{
++        return od_openx(fd, MRSP_SEM, name, prio_per_cpu);
++}
++
++static inline int * init_prio_per_cpu(int count, ...)
++{
++	va_list prios;
++	int i, val;
++	int *prio_per_cpu;
++
++	if(num_online_cpus() != count)
++		return NULL;
++
++	prio_per_cpu = malloc (sizeof(int) * count);
++
++	if (!prio_per_cpu)
++		return NULL;
++
++	va_start(prios,count);
++	for (i = 0; i < count ; i++){
++		val = va_arg(prios,int);
++		if (val < LITMUS_HIGHEST_PRIORITY || val > LITMUS_LOWEST_PRIORITY)
++			return NULL;
++		prio_per_cpu[i] = val;
++	}
++	va_end(prios);
++
++	return prio_per_cpu;
++}
++
++/**
+  * Get budget information from the scheduler (in nanoseconds).
+  * @param expended pointer to time value in wich the total
+  *        amount of already used-up budget will be stored.
+diff -Naur liblitmus/src/litmus.c liblitmus-mrsp/src/litmus.c
+--- liblitmus/src/litmus.c	2017-06-02 11:32:44.495571000 +0200
++++ liblitmus-mrsp/src/litmus.c	2017-06-02 12:10:18.907678634 +0200
+@@ -27,7 +27,6 @@
+ 	LP(DPCP),
+ 	LP(PCP),
+ 	LP(DFLP),
+-	LP(MRSP),
+ };
+ 
+ #define NUM_PROTOS (sizeof(protocol)/sizeof(protocol[0]))
